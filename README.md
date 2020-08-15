@@ -1,4 +1,5 @@
 ## Demo - studyproject-17d87.web.app
+<<<<<<< HEAD
 
 ## Question 1
 
@@ -22,3 +23,5 @@
     }
     return -1;
   }
+=======
+>>>>>>> d26be6ff48d0f04174515e17742ca9a51132dccd
