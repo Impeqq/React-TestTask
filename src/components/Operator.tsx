@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Link from "next/link";
+import LinkComponent from "../components/LinkComponent";
 
 const OperatorItem = styled.div`
   width: 213px;
@@ -8,7 +8,6 @@ const OperatorItem = styled.div`
   border-radius: 5px;
   padding: 1rem;
   display: flex;
-  cursor: pointer;
   flex-direction: column;
   align-items: center;
   border: 1px solid rgb(235, 235, 235);
@@ -19,11 +18,9 @@ const OperatorItem = styled.div`
 const OperatorButton = styled.button`
   width: 100%;
   display: block;
-  height: 40px;
   outline: none;
   color: #fff;
   font-weight: 700;
-  padding: 10px;
   text-transform: uppercase;
   border-radius: 5px;
   border: none;
@@ -52,14 +49,17 @@ const OperatorListName = styled.p`
 
 export default function Operator({ operator }) {
   return (
-    <>
-      <Link href={"/operator/[id]"} as={"/operator/" + operator.id}>
-        <OperatorItem>
-          <OperatorListImg src={operator.img} />
-          <OperatorListName>{operator.name}</OperatorListName>
-          <OperatorButton>Оплатить</OperatorButton>
-        </OperatorItem>
-      </Link>
-    </>
+    <OperatorItem>
+      <OperatorListImg src={operator.img} />
+      <OperatorListName>{operator.name}</OperatorListName>
+      <OperatorButton>
+        <LinkComponent
+          href={"/operator/[id]"}
+          as={"/operator/" + operator.id}
+          text="Оплатить"
+          className="main"
+        ></LinkComponent>
+      </OperatorButton>
+    </OperatorItem>
   );
 }

@@ -1,20 +1,16 @@
 function func(s, a, b) {
-  if (s.match(/^$/)) {
+  if (s.length == 0) {
     return -1;
   }
-  var i = s.length - 1,
-    aIndex = -1,
+
+  var aIndex = -1,
     bIndex = -1;
-  while (aIndex == -1 && bIndex == -1 && i > 0) {
-    if (s[i] == a) {
-      aIndex = i;
-      return aIndex;
-    }
-    if (s[i] == b) {
-      bIndex = i;
-      return bIndex;
-    }
-    i--;
+
+  if (s.lastIndexOf(a) != null) {
+    aIndex = s.lastIndexOf(a);
   }
-  return -1;
+  if (s.lastIndexOf(b) != null) {
+    bIndex = s.lastIndexOf(b);
+  }
+  return Math.max(aIndex, bIndex);
 }

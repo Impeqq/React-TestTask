@@ -1,4 +1,4 @@
-import Operator from "./Operator";
+import Operator from "../components/Operator";
 import { operators } from "../const/operators";
 import styled from "styled-components";
 
@@ -15,12 +15,10 @@ const OperatorsListBlock = styled.div`
 
 export default function OperatorsList() {
   return (
-    <>
-      <OperatorsListBlock>
-        {operators.map((operator) => (
-          <Operator key={operator.id} operator={operator} />
-        ))}
-      </OperatorsListBlock>
-    </>
+    <OperatorsListBlock>
+      {operators.map((operator) => (
+        <Operator key={operator.id} operator={operator} />
+      ))}
+    </OperatorsListBlock>
   );
 }
