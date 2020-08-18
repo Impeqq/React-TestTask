@@ -109,11 +109,11 @@ const PaymentDescription = styled.div`
   }
 `;
 
-function Operator() {
+export default function Operator() {
   const [operator, setOperator] = useState("");
 
   useEffect(() => {
-    function load() {
+    const load = () => {
       operators.map((data: any) => {
         if (data.id.toString() == location.pathname.split("/")[2]) {
           setTimeout(() => {
@@ -168,5 +168,3 @@ function Operator() {
     </MainLayout>
   );
 }
-
-export default Operator;

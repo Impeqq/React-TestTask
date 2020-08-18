@@ -4,6 +4,7 @@ import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import MaskedInput from "react-input-mask";
 import Router from "next/router";
+import IntlCurrencyInput from "react-intl-currency-input";
 
 const PaymentInputTemplate = styled.div`
   width: 300px;
@@ -155,32 +156,45 @@ export default function OperatorForm() {
   const [finalErrors, setFinalErrors] = useState([]);
   const [finalSuccess, setFinalSuccess] = useState([]);
 
-  const validateSum = (value) => {
-    if (value) {
-      if (
-        parseInt(value.replace(/\D+/g, "")) > 1000 ||
-        parseInt(value.replace(/\D+/g, "")) < 1
-      ) {
-        return false;
-      } else {
-        return true;
-      }
+  const currencyConfig = {
+    locale: "ru-RU",
+    formats: {
+      number: {
+        "ru-RU": {
+          style: "currency",
+          currency: "RUB",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+          useGrouping: false,
+        },
+      },
+    },
+  };
+
+  const validateSum = (value = "0") => {
+    if (
+      parseInt(value.replace(/\D+/g, "")) > 1000 ||
+      parseInt(value.replace(/\D+/g, "")) < 1 ||
+      parseInt(value).toString() == 'NaN'
+    ) {
+      return false;
+    } else {
+      return true;
     }
   };
 
   return (
     <Formik
-      initialValues={{ phone: "", sum: "" }}
+      initialValues={{ phone: "", sum: "0" }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           if (Math.random() >= 0.5) {
             setFinalErrors([]);
             setFinalSuccess([
-              "Вы успешно пополнили баланс номера " +
-                values.phone +
-                " на " +
-                parseInt(values.sum.replace(/\D+/g, "")) +
-                " руб.",
+              `Вы успешно пополнили баланс номера
+                ${values.phone}
+                 на
+                ${parseInt(values.sum.replace(/\D+/g, ""))} ₽`,
             ]);
             setTimeout(() => {
               Router.push("/");
@@ -204,22 +218,19 @@ export default function OperatorForm() {
           .required("Укажите cумму пополнения")
           .test(
             "sum",
-            "Укажите сумма пополнения от 1 до 1000 рублей",
+            "Укажите сумма пополнения от 1₽ до 1000₽",
             validateSum
           ),
       })}
     >
       {(props) => {
         const {
-          values,
           touched,
           errors,
-          dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
         } = props;
         return (
           <form onSubmit={handleSubmit}>
@@ -254,9 +265,9 @@ export default function OperatorForm() {
               <PaymentInputText htmlFor="sum">Сумма</PaymentInputText>
               <Field name="sum">
                 {({ field }) => (
-                  <MaskedInput
+                  <IntlCurrencyInput
                     {...field}
-                    mask="9999 руб"
+                    value={parseInt(field.value.replace(/\D+/g, ""))}
                     id="sum"
                     type="text"
                     onChange={handleChange}
@@ -266,6 +277,8 @@ export default function OperatorForm() {
                         ? "text-input error"
                         : "text-input"
                     }
+                    currency={currencyConfig.locale}
+                    config={currencyConfig}
                   />
                 )}
               </Field>
@@ -290,7 +303,7 @@ export default function OperatorForm() {
               </Success>
             ) : null}
             <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <Loader></Loader> : "Оплатить"}
+              {isSubmitting ? <Loader></Loader> : "Оплатить"}
             </Button>
           </form>
         );
