@@ -1,14 +1,16 @@
 import * as Yup from "yup";
 
 const validateSum = (value) => {
-  if (
-    parseInt(value.replace(/\D+/g, "")) > 1000 ||
-    parseInt(value.replace(/\D+/g, "")) < 1 ||
-    parseInt(value.replace(/\D+/g, "")).toString() == "NaN"
-  ) {
-    return false;
-  } else {
-    return true;
+  if(value) {
+    if (
+      parseInt(value.replace(/\D+/g, "")) > 1000 ||
+      parseInt(value.replace(/\D+/g, "")) < 1 ||
+      parseInt(value.replace(/\D+/g, "")).toString() == "NaN"
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 };
 

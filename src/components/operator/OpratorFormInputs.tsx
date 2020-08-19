@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import OperatorInput from "./OperatorInput";
+import Notification from "../Notification";
 
 const PaymentInputTemplate = styled.div`
   width: 300px;
@@ -17,83 +18,6 @@ const PaymentInputText = styled.label`
   display: inline-block;
   font-weight: 500;
   font-size: 17px;
-`;
-
-const Errors = styled.ul`
-  border: 1px solid rgb(255, 153, 153);
-  background: #ffe3e3;
-  border-radius: 5px;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 15px;
-  padding: 0 10px;
-  list-style: none;
-
-  &.final {
-    margin-bottom: 30px;
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 100%;
-  }
-
-  & li {
-    margin: 10px 0;
-    position: relative;
-    padding-left: 10px;
-    font-size: 15px;
-    color: rgb(221, 77, 77);
-
-    &:before {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      width: 5px;
-      height: 5px;
-      background: red;
-      border-radius: 100%;
-    }
-  }
-`;
-
-const Success = styled.ul`
-  border: 1px solid rgb(153, 255, 158);
-  background: #e3ffe3;
-  border-radius: 5px;
-  width: 300px;
-  margin: 0 auto;
-  padding: 0 10px;
-  list-style: none;
-
-  &.final {
-    margin-bottom: 30px;
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 100%;
-  }
-
-  & li {
-    margin: 10px 0;
-    position: relative;
-    padding-left: 10px;
-    font-size: 15px;
-    color: rgb(48 183 30);
-
-    &:before {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      width: 5px;
-      height: 5px;
-      background: rgb(94, 221, 77);
-      border-radius: 100%;
-    }
-  }
 `;
 
 const Loader = styled.div`
@@ -169,16 +93,8 @@ export default function OperatorFormInputs({
         mask="9999 ₽"
         label="Сумма"
       />
-      {finalErrors ? (
-        <Errors className="final">
-          <li>{finalErrors}</li>
-        </Errors>
-      ) : null}
-      {finalSuccess ? (
-        <Success className="final">
-          <li>{finalSuccess}</li>
-        </Success>
-      ) : null}
+      <Notification value={finalErrors} className="final"/>
+      <Notification value={finalSuccess} className="final success"/>
       <Button type="submit" disabled={props.isSubmitting}>
         {props.isSubmitting ? <Loader></Loader> : "Оплатить"}
       </Button>

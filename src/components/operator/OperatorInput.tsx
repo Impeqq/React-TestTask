@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Field } from "formik";
 import MaskedInput from "react-input-mask";
 
+import Notification from "../Notification";
+
 const PaymentInputTemplate = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -88,11 +90,7 @@ export default function OperatorInput({ props, name, type, mask, label }: InputV
           />
         )}
       </Field>
-      {props.errors[name] && props.touched[name] ? (
-        <Errors>
-          <li>{props.errors[name]}</li>
-        </Errors>
-      ) : null}
+      <Notification value={props.errors[name]} touch={props.touched[name]}/>
     </PaymentInputTemplate>
   );
 }
