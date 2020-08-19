@@ -22,45 +22,6 @@ const PaymentInputText = styled.label`
   font-size: 17px;
 `;
 
-const Errors = styled.ul`
-  border: 1px solid rgb(255, 153, 153);
-  background: #ffe3e3;
-  border-radius: 5px;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 15px;
-  padding: 0 10px;
-  list-style: none;
-
-  &.final {
-    margin-bottom: 30px;
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 100%;
-  }
-
-  & li {
-    margin: 10px 0;
-    position: relative;
-    padding-left: 10px;
-    font-size: 15px;
-    color: rgb(221, 77, 77);
-
-    &:before {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      width: 5px;
-      height: 5px;
-      background: red;
-      border-radius: 100%;
-    }
-  }
-`;
-
 interface InputValidation {
     props: any,
     name: string,

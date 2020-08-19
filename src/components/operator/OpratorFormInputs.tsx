@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import OperatorInput from "./OperatorInput";
 import Notification from "../Notification";
 import Button from "../Button";
