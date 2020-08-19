@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LinkComponent from "../components/LinkComponent";
+import LinkComponent from "../LinkComponent";
 
 const OperatorItem = styled.div`
   width: 213px;

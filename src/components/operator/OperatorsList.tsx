@@ -1,5 +1,5 @@
-import Operator from "../components/Operator";
-import { operators } from "../const/operators";
+import Operator from "./Operator";
+import { operators } from "../../const/operators";
 import styled from "styled-components";
 
 const OperatorsListBlock = styled.div`

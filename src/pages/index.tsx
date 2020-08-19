@@ -1,5 +1,5 @@
 import MainLayout from "../components/MainLayout";
-import OperatorsList from "../components/OperatorsList";
+import OperatorsList from "../components/operator/OperatorsList";
 
 export default function Home() {
   return (
