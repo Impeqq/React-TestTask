@@ -23,12 +23,12 @@ const Change = styled.button`
 `;
 
 const ChangeLanguage = ({ locale, setLocale, messages, setMessages  }) => {
+
   useEffect(() => {
-    setLocale(localStorage.getItem("locale") ? localStorage.getItem("locale") : 'en');
-    setMessages(localStorage.getItem("messages") ? JSON.parse(localStorage.getItem("messages")) : English);
+    localStorage.getItem("locale") ? changeLanguage(localStorage.getItem("locale")) : changeLanguage("en");
   }, []);
 
-  const ChangeLanguage = (locale) => {
+  const changeLanguage = (locale) => {
     setLocale(locale);
     localStorage.setItem("locale", locale);
     switch (locale) {
@@ -46,8 +46,8 @@ const ChangeLanguage = ({ locale, setLocale, messages, setMessages  }) => {
 
   return (
     <>
-      <Change onClick={() => ChangeLanguage("ru")}>RU</Change>
-      <Change onClick={() => ChangeLanguage("en")}>ENG</Change>
+      <Change onClick={() => changeLanguage("ru")}>RU</Change>
+      <Change onClick={() => changeLanguage("en")}>ENG</Change>
     </>
   );
 };
