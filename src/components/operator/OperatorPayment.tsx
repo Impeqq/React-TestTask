@@ -8,9 +8,7 @@ import OperatorForm from "./OperatorForm";
 
 import { operators } from "../../const/operators";
 
-import { IntlProvider, FormattedMessage } from "react-intl";
-import Russian from "../../languages/ru-RU.json";
-import English from "../../languages/en-EN.json";
+import { FormattedMessage, injectIntl } from "react-intl";
 
 const PaymentTop = styled.div`
   background: #fff;
@@ -117,29 +115,22 @@ const PaymentDescription = styled.div`
   }
 `;
 
-export default function OperatorPayment() {
-  const [operator, setOperator] = useState("");
-
-  const locale = "ru-RU";
-  const messages = Russian;
+const OperatorPayment = ({ intl, props }) => {
+  const [operator, setOperator] = useState({ id: null, name: null, img: null });
 
   useEffect(() => {
-    const load = () => {
-      operators.map((data: any) => {
-        if (data.id.toString() == location.pathname.split("/")[2]) {
-          setTimeout(() => {
+    operators.map((data) => {
+      data.id.toString() == location.pathname.split("/")[2]
+        ? setTimeout(() => {
             setOperator(data);
-          }, 1000);
-        }
-      });
-    }
-
-    load();
+          }, 1000)
+        : null;
+    });
   }, []);
 
-  if (!operator) {
+  if (!operator.id) {
     return (
-      <MainLayout>
+      <MainLayout props={props} title={intl.formatMessage({ id: "title" })}>
         <Payment className="loading">
           <PaymentTop></PaymentTop>
           <PaymentBody></PaymentBody>
@@ -149,7 +140,10 @@ export default function OperatorPayment() {
   }
 
   return (
-    <MainLayout title={"Оплата " + operator["name"]}>
+    <MainLayout
+      props={props}
+      title={intl.formatMessage({ id: "title" }) + " - " + operator.name}
+    >
       <Payment>
         <PaymentTop>
           <PaymentArrow>
@@ -157,28 +151,31 @@ export default function OperatorPayment() {
               href={"/"}
               text="&larr;"
               className="arrow"
+              translation={false}
             ></LinkComponent>
           </PaymentArrow>
-          <PaymentTitle>Оплата {operator["name"]}</PaymentTitle>
+          <PaymentTitle>
+            <FormattedMessage id="title" /> {operator.name}
+          </PaymentTitle>
           <PaymentArrow className="hidden">&larr;</PaymentArrow>
         </PaymentTop>
 
         <PaymentBody>
-          <PaymentBodyImg src={operator["img"]} />
+          <PaymentBodyImg src={operator.img} />
           <PaymentInputTemplate>
-            <PaymentInputText>Выбранный оператор</PaymentInputText>
-            <input type="text" value={operator["name"]} disabled />
+            <PaymentInputText>
+              <FormattedMessage id="input1" />
+            </PaymentInputText>
+            <input type="text" value={operator.name} disabled />
           </PaymentInputTemplate>
           <OperatorForm></OperatorForm>
           <PaymentDescription>
-            <IntlProvider locale={locale} messages={messages}>
-              <FormattedMessage
-                id="description"
-              />
-            </IntlProvider>
+            <FormattedMessage id="description" />
           </PaymentDescription>
         </PaymentBody>
       </Payment>
     </MainLayout>
   );
-}
+};
+
+export default injectIntl(OperatorPayment);

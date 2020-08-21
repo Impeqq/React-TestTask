@@ -6,7 +6,7 @@ import OperatorFormInputs from "./OpratorFormInputs"
 
 import { validationSchema } from "../../const/yupSchema";
 
-export default function OperatorForm() {
+const OperatorForm = () => {
   const [finalErrors, setFinalErrors] = useState(null);
   const [finalSuccess, setFinalSuccess] = useState(null);
 
@@ -19,9 +19,7 @@ export default function OperatorForm() {
           if (Math.random() >= 0.5) {
             setFinalErrors(null);
             setFinalSuccess(
-              `Вы успешно пополнили баланс номера ${values.phone} на ${parseInt(
-                values.sum.replace(/\D+/g, "")
-              )} ₽`
+              'notification5'
             );
             setTimeout(() => {
               Router.push("/");
@@ -29,7 +27,7 @@ export default function OperatorForm() {
             return true;
           } else {
             setFinalSuccess(null);
-            setFinalErrors("Произошла ошибка, повторите попытку.");
+            setFinalErrors("notification6");
           }
           setSubmitting(false);
         }, 500);
@@ -51,3 +49,5 @@ export default function OperatorForm() {
     </Formik>
   );
 }
+
+export default OperatorForm;

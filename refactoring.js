@@ -1,4 +1,8 @@
-const func = (s, a, b) => Math.max(s.lastIndexOf(a), s.lastIndexOf(b))
+const func = (s, a, b) => s ? Math.max(s.lastIndexOf(a), s.lastIndexOf(b)) : -1
 
 // Функция возвращает индекс последнего вхождения a или b в строку s.
 // Если s - undefiend, то функция возвращает ошибку.
+
+// UPDATE
+// Если s - undefiend, то функция возвращает -1
+// Остальные аргументы не требуют проверки на существование, т.к если они будут undefiend, то функция возвращает -1

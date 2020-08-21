@@ -1,8 +1,7 @@
 import OperatorPayment from "../../components/operator/OperatorPayment";
 
-export default function Operator() {
+const Operator = ({props}) => {
+  return <OperatorPayment props={props}></OperatorPayment>;
+};
 
-  return (
-      <OperatorPayment></OperatorPayment>
-  );
-}
+export default Operator;

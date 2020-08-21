@@ -1,3 +1,18 @@
 {
-    "description": "Attention: receiving money to your account using this terminal is done at your own peril and risk!"
+    "general": "Payment terminal",
+    "input1": "Selected operator",
+    "input2": "Phone number",
+    "input3": "Sum",
+    "button": "Pay",
+    "title": "Payment",
+    "title1": "Operator selection",
+    "description": "Attention: receiving money to your account using this terminal is done at your own peril and risk!",
+    "footer": "Test job",
+
+    "notification1": "Please enter correct phone number",
+    "notification2": "Enter your phone number",
+    "notification3": "Specify the amount of replenishment from RUB 1 to RUB 1000",
+    "notification4": "Enter the amount of replenishment",
+    "notification5": "You have successfully replenished your phone balance",
+    "notification6": "An error has occurred, please try again"
 }

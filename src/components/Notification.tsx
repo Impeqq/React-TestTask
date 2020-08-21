@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
 
 const Alert = styled.ul`
   border: 1px solid rgb(255, 153, 153);
@@ -53,23 +54,23 @@ const Alert = styled.ul`
 `;
 
 interface NotificationValidation {
-  value: any;
-  touch?: any;
+  value: string;
+  touch?: string;
   className?: string;
 }
 
-export default function Notification({
-  value,
-  touch,
-  className,
-}: NotificationValidation) {
-  return (
-    <>
-      {value && touch || value && className ? (
-        <Alert className={className}>
-          <li>{value}</li>
-        </Alert>
-      ) : null}
-    </>
-  );
-}
+const Notification = ({ value, touch, className }: NotificationValidation) => {
+  if ((value && touch) || (value && className)) {
+    return (
+      <Alert className={className}>
+        <li>
+          <FormattedMessage id={value} />
+        </li>
+      </Alert>
+    );
+  } else {
+    return null;
+  }
+};
+
+export default Notification;

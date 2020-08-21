@@ -2,11 +2,7 @@ import OperatorInput from "./OperatorInput";
 import Notification from "../Notification";
 import Button from "../Button";
 
-export default function OperatorFormInputs({
-  props,
-  finalErrors,
-  finalSuccess,
-}) {
+const OperatorFormInputs = ({ props, finalErrors, finalSuccess }) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <OperatorInput
@@ -14,18 +10,20 @@ export default function OperatorFormInputs({
         name="phone"
         type="text"
         mask="+7 (999) 999-99-99"
-        label="Номер телефона"
+        label="input2"
       />
       <OperatorInput
         props={props}
         name="sum"
         type="text"
         mask="9999 ₽"
-        label="Сумма"
+        label="input3"
       />
-      <Notification value={finalErrors} className="final"/>
-      <Notification value={finalSuccess} className="final success"/>
-      <Button text="Оплатить" disabled={props.isSubmitting} />
+      <Notification value={finalErrors} className="final" />
+      <Notification value={finalSuccess} className="final success" />
+      <Button text="button" disabled={props.isSubmitting} />
     </form>
   );
-}
+};
+
+export default OperatorFormInputs;

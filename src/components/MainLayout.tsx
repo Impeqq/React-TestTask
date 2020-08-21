@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
+import ChangeLanguage from "./ChangeLanguage";
+import { IntlProvider, FormattedMessage } from "react-intl";
 
 const Container = styled.div`
   flex-grow: 1;
@@ -16,21 +18,29 @@ const Footer = styled.div`
   width: 100%;
   background: #fff;
   font-size: 15px;
+  padding-top: 20px;
   text-align: center;
 `;
 
-export default function MainLayout({ children, title = "Терминал оплаты" }) {
+const MainLayout = ({ children, title, props}) => {
   return (
-    <>
+    <IntlProvider locale={props.locale} messages={props.messages}>
       <Head>
         <title>{title}</title>
       </Head>
-      <h1>Терминал оплаты</h1>
+      <h1>
+        <FormattedMessage id="general" />
+      </h1>
       <Container>{children}</Container>
       <Footer>
-        <p>Brave Developers - Тестовое задание</p>
+        <ChangeLanguage {...props} />
+        <p>
+          Brave Developers - <FormattedMessage id="footer" />
+        </p>
         <p>2020 г.</p>
       </Footer>
-    </>
+    </IntlProvider>
   );
-}
+};
+
+export default MainLayout;

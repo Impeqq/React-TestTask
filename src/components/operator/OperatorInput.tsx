@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { Field } from "formik";
 import MaskedInput from "react-input-mask";
+import { FormattedMessage } from "react-intl";
 
 import Notification from "../Notification";
 
@@ -23,17 +24,24 @@ const PaymentInputText = styled.label`
 `;
 
 interface InputValidation {
-    props: any,
+    props: {
+      handleChange: void,
+      handleBlur: void,
+      errors: object,
+      touched: object,
+    },
     name: string,
     type: string,
     mask?: string
     label: string
   }
 
-export default function OperatorInput({ props, name, type, mask, label }: InputValidation) {
+const OperatorInput = ({ props, name, type, mask, label }: InputValidation) => {
   return (
     <PaymentInputTemplate>
-      <PaymentInputText htmlFor={name}>{label}</PaymentInputText>
+      <PaymentInputText htmlFor={name}>
+      <FormattedMessage id={label} />
+      </PaymentInputText>
       <Field name={name}>
         {({ field }) => (
           <MaskedInput
@@ -55,3 +63,5 @@ export default function OperatorInput({ props, name, type, mask, label }: InputV
     </PaymentInputTemplate>
   );
 }
+
+export default OperatorInput

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LinkComponent from "../LinkComponent";
+import { operatorRoute } from "../../const/routes";
 
 const OperatorItem = styled.div`
   width: 213px;
@@ -47,19 +48,22 @@ const OperatorListName = styled.p`
   border-bottom: 1px solid #ccc;
 `;
 
-export default function Operator({ operator }) {
+const Operator = ({ operator }) => {
   return (
     <OperatorItem>
       <OperatorListImg src={operator.img} />
       <OperatorListName>{operator.name}</OperatorListName>
       <OperatorButton>
         <LinkComponent
-          href={"/operator/[id]"}
-          as={"/operator/" + operator.id}
-          text="Оплатить"
+          href={operatorRoute.url}
+          as={operatorRoute.as + operator.id}
+          text="button"
+          translation={true}
           className="main"
         ></LinkComponent>
       </OperatorButton>
     </OperatorItem>
   );
-}
+};
+
+export default Operator;

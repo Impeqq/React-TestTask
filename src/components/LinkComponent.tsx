@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { FormattedMessage } from "react-intl";
 
 const LinkText = styled.div`
   &.main {
@@ -12,16 +13,27 @@ const LinkText = styled.div`
 `;
 
 interface LinkValidation {
-  href: string,
-  text: string,
-  as?: string,
-  className?: string
+  href: string;
+  text: string;
+  as?: string;
+  className?: string;
+  translation?: boolean;
 }
 
-export default function LinkComponent({ href, text, as, className }:LinkValidation) {
+const LinkComponent = ({
+  href,
+  text,
+  as,
+  className,
+  translation,
+}: LinkValidation) => {
   return (
     <Link href={href} as={as}>
-        <LinkText className={className}>{text}</LinkText>
+      <LinkText className={className}>
+        {translation ? <FormattedMessage id={text} /> : text}
+      </LinkText>
     </Link>
   );
-}
+};
+
+export default LinkComponent;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
 
 const Loader = styled.div`
   display: inline-block;
@@ -53,17 +54,16 @@ const Button = styled.button`
 `;
 
 interface ButtonValidation {
-  disabled?: any;
+  disabled?: boolean;
   text: string;
 }
 
-export default function Notification({
-  disabled,
-  text,
-}: ButtonValidation) {
+const Notification = ({ disabled, text }: ButtonValidation) => {
   return (
     <Button type="submit" disabled={disabled}>
-      {disabled ? <Loader></Loader> : text}
+      {disabled ? <Loader></Loader> : <FormattedMessage id={text} />}
     </Button>
   );
-}
+};
+
+export default Notification;
