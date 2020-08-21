@@ -2,7 +2,7 @@ import styled from "styled-components";
 import LinkComponent from "../LinkComponent";
 import { operatorRoute } from "../../const/routes";
 
-const OperatorItem = styled.div`
+const OperatorBlock = styled.div`
   width: 213px;
   margin: 10px;
   background: #fff;
@@ -48,9 +48,9 @@ const OperatorListName = styled.p`
   border-bottom: 1px solid #ccc;
 `;
 
-const Operator = ({ operator }) => {
+const OperatorItem = ({ operator }) => {
   return (
-    <OperatorItem>
+    <OperatorBlock>
       <OperatorListImg src={operator.img} />
       <OperatorListName>{operator.name}</OperatorListName>
       <OperatorButton>
@@ -62,8 +62,8 @@ const Operator = ({ operator }) => {
           className="main"
         ></LinkComponent>
       </OperatorButton>
-    </OperatorItem>
+    </OperatorBlock>
   );
 };
 
-export default Operator;
+export default OperatorItem;
