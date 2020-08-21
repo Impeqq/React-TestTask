@@ -34,12 +34,10 @@ const ChangeLanguage = ({ locale, setLocale, messages, setMessages  }) => {
     switch (locale) {
       case "en":
         setMessages(English);
-        localStorage.setItem("messages", JSON.stringify(English));
         break;
 
       default:
         setMessages(Russian);
-        localStorage.setItem("messages", JSON.stringify(Russian));
         break;
     }
   };
